@@ -71,6 +71,7 @@
     "mkdirp": "^0.5.1",
     "ncp": "^2.0.0",
     "offline-plugin": "^4.5.3",
+    "postcss-css-variables": "^0.7.0",
     "postcss-loader": "^1.2.1",
     "preact-jsx-chai": "^2.2.1",
     "raw-loader": "^0.5.1",
@@ -83,16 +84,21 @@
     "style-loader": "^0.16.0",
     "url-loader": "^0.5.7",
     "v8-lazy-parse-webpack-plugin": "^0.3.0",
-    "webpack": "^1.13.2",
+    "webpack": "^1.9.8",
     "webpack-dev-server": "^1.15.0"
   },
   "dependencies": {
+    "i18nline": "^1.5.0",
     "preact": "^8.1.0",
-    "preact-compat": "^3.13.1",
+    "preact-compat": "^3.15.0",
+    "preact-helmet": "^4.0.0-alpha-2",
+    "preact-i18nline": "^1.5.0",
     "preact-render-to-string": "^3.6.0",
     "preact-router": "^2.4.1",
     "promise-polyfill": "^6.0.2",
     "proptypes": "^0.14.3",
+    "react-dnd": "^2.3.0",
+    "react-dnd-html5-backend": "^2.3.0",
     "serve": "^5.1.4"
   }
 }
