@@ -13,11 +13,16 @@ const ACTIONS = {
         is_overed: rendType,
         ...state
     } ),
+    SOCIAL_SIZE: ({social, ...state}, { size }) => ({
+        social: size,
+        ...state
+    } ),
 };
 
 const INITIAL = {
     file: '',
-    is_loading: false
+    is_loading: false,
+    social: {w: 200, h: 200}
 };
 
 export default createStore((state, action) => (

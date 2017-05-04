@@ -1,24 +1,63 @@
 import { h, Component } from 'preact';
-import { Accordion, AccordionItem } from 'react-sanfona';
+import { DragDropContext } from 'react-dnd';
+import HTML5Backend from 'react-dnd-html5-backend';
+import Container from './Container';
 
-export default class Test extends Component {
+@DragDropContext(HTML5Backend)
+export default class DragAroundNaive extends Component {
+    constructor(props) {
+        super(props);
+        this.handleHideSourceClick = this.handleHideSourceClick.bind(this);
+        this.state = {
+            hideSourceOnDrag: true,
+        };
+    }
+
+    handleHideSourceClick() {
+        this.setState({
+            hideSourceOnDrag: !this.state.hideSourceOnDrag,
+        });
+    }
 
     render() {
+        const { hideSourceOnDrag } = this.state;
+
         return (
-            <Accordion>
-                {[1, 2, 3, 4, 5].map((item) => {
-                    return (
-                        <AccordionItem title={`Item ${ item }`} slug={item} key={item}>
-                            <div>
-                                {`Item ${ item } content`}
-                                {item === 3 ? <p><img
-                                    src="https://cloud.githubusercontent.com/assets/38787/8015584/2883817e-0bda-11e5-9662-b7daf40e8c27.gif"/>
-                                </p> : null}
-                            </div>
-                        </AccordionItem>
-                    );
-                })}
-            </Accordion>
+            <div>
+                <p>
+                    <b><a href="https://github.com/react-dnd/react-dnd/tree/master/examples/02%20Drag%20Around/Naive">Browse the Source</a></b>
+                </p>
+                <p>
+                    This example naively relies on browser drag and drop implementation without much custom logic.
+                </p>
+                <p>
+                    When the box is dragged, we remove its original DOM node by returning <code>null</code> from <code>render()</code> and let browser draw the drag preview.
+                    When the is released, we draw it at the new coordinates.
+                    If you try to drag the box outside the container, the browser will animate its return.
+                </p>
+                <p>
+                    While this approach works for simple cases, it flickers on drop.
+                    This happens because the browser removes the drag preview before we have a chance to make the dragged item visible.
+                    This might not be a problem if you dim the original item instead of hiding it, but it&apos;s clearly visible otherwise.
+                </p>
+                <p>
+                    If we want to add custom logic such as snapping to grid or bounds checking, we can only do this on drop.
+                    There is no way for us to control what happens to dragged preview once the browser has drawn it.
+                    Check out the <a href="examples-drag-around-custom-drag-layer.html">custom rendering example</a> if you&apos;d rather trade more control for some more work.
+                </p>
+                <Container hideSourceOnDrag={hideSourceOnDrag} />
+                <p>
+                    <label htmlFor="hideSourceOnDrag">
+                        <input
+                            id="hideSourceOnDrag"
+                            type="checkbox"
+                            checked={hideSourceOnDrag}
+                            onChange={this.handleHideSourceClick}
+                        />
+                        <small>Hide the source item while dragging</small>
+                    </label>
+                </p>
+            </div>
         );
     }
 }

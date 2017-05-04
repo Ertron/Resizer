@@ -1,11 +1,10 @@
 import { h, Component } from 'preact';
-import { DragDropContext, DragDropContextProvider } from 'react-dnd';
-import HTML5Backend, { NativeTypes } from 'react-dnd-html5-backend';
+
 import TargetBox from './TargetBox';
 import { connect } from 'preact-redux';
+import { NativeTypes } from 'react-dnd-html5-backend';
 
 @connect(state => state)
-@DragDropContext(HTML5Backend)
 export default class Uploader extends Component {
     constructor(props) {
         super(props);
@@ -35,12 +34,10 @@ export default class Uploader extends Component {
         const { droppedFiles } = this.state;
 
         return (
-            <DragDropContextProvider backend={HTML5Backend}>
-                <div>
-                    <TargetBox accepts={[FILE]} onDrop={this.handleFileDrop} />
-                    {/*<FileList files={droppedFiles} />*/}
-                </div>
-            </DragDropContextProvider>
+            <div>
+                <TargetBox accepts={[FILE]} onDrop={this.handleFileDrop} />
+                {/*<FileList files={droppedFiles} />*/}
+            </div>
         );
     }
 }
