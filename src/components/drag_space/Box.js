@@ -16,16 +16,20 @@ export default class Box extends Component {
   };
 
   shouldComponentUpdate = shouldPureComponentUpdate;
+    componentDidUpdate(){
+        console.log('PROPS xxx : ',this.props);
+    }
 
   render() {
     const { title, yellow } = this.props;
     const backgroundColor = yellow ? 'yellow' : 'white';
+    const display = this.props.file_props.url ? 'block' : 'none';
 
       /*<div style={{ ...styles, backgroundColor }}>
        {title}
        </div>*/
     return (
-      <img width={500} src={this.props.file} />
+      <img style={{width: `${this.props.file_props.width}`, display: `${display}`}} src={this.props.file_props.url} />
     );
   }
 }

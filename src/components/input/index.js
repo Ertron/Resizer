@@ -44,7 +44,7 @@ export default class Input extends Component {
 				<label class={style.custom_upload_btn_label}>
 					<input onChange={(e) => this.addFile(e)} class={style.custom_upload_btn_input} type="file" accept="image/*"/>
 						<div class={!props.is_overed ? this.labelStyle(true) : this.labelStyle(false)}>
-							<span>UPLOAD LOGO</span>
+							<span>UPLOAD IMAGE</span>
 						</div>
 				</label>
 				: false}

@@ -3,20 +3,29 @@ import PropTypes from 'prop-types';
 import { DragLayer } from 'react-dnd';
 import ItemTypes from './ItemTypes';
 import BoxDragPreview from './BoxDragPreview';
+import { connect } from 'preact-redux';
 
-const layerStyles = {
-  position: 'absolute',
-  pointerEvents: 'none',
-  zIndex: 100,
-  left: -820,
-  top: -209,
-  width: '100%',
-  height: '100%',
+const layerStyles = function (left, top){
+    let tops = top;
+    let lefts =  left;
+
+    /*console.log({ top, left });*/
+    return {
+        position: 'absolute',
+        pointerEvents: 'none',
+        zIndex: 100,
+        left: lefts,
+        top: tops,
+        width: '100%',
+        height: '100%',
+        backgroundColor: 'red',
+    }
 };
 
 function getItemStyles(props) {
-    /*console.log('getItemStyles : ', props);*/
+    // console.log('getItemStyles : ', props);
   const { initialOffset, currentOffset } = props;
+  // console.log(initialOffset, currentOffset);
   if (!initialOffset || !currentOffset) {
       return {
           display: 'none',
@@ -25,8 +34,7 @@ function getItemStyles(props) {
 
 
   let { x, y } = currentOffset;
-
-  const transform = `translate(${x}px, ${y}px)`;
+  const transform = `translate(0px, 0px)`;
   return {
     transform,
     WebkitTransform: transform,
@@ -37,9 +45,13 @@ function getItemStyles(props) {
   item: monitor.getItem(),
   itemType: monitor.getItemType(),
   initialOffset: monitor.getInitialSourceClientOffset(),
-  currentOffset: monitor.getSourceClientOffset(),
+  initialClOffset: monitor.getInitialClientOffset(),
+  currentOffset: monitor.getSourceClientOffset(), // block coord
+  clientOffset: monitor.getClientOffset(), //mouse coord
   isDragging: monitor.isDragging(),
+  diff: monitor.getDifferenceFromInitialOffset(),
 }))
+@connect(state => state)
 export default class CustomDragLayer extends Component {
   static propTypes = {
     item: PropTypes.object,
@@ -53,8 +65,14 @@ export default class CustomDragLayer extends Component {
       y: PropTypes.number.isRequired,
     }),
     isDragging: PropTypes.bool.isRequired,
-
   };
+    constructor(props) {
+        super(props);
+        this.setState({
+            somestate: this.props.offset
+        });
+
+    }
 
   renderItem(type, item) {
     switch (type) {
@@ -66,42 +84,28 @@ export default class CustomDragLayer extends Component {
   }
 
   render() {
-    let { item, itemType, isDragging, currentOffset } = this.props;
-
-
-    /*if(this.props.currentOffset != null && this.props.currentOffset.x <= 0){
-        console.info('PROPSSS : ', item);
-        item.left = 0;
-    }*/
-
+    let { item, itemType, isDragging, currentOffset, initialOffset, clientOffset, diff } = this.props;
+      /*console.log(this.props.clientOffset, currentOffset);*/
+      /*console.log("currentOffset : ", currentOffset, " initialClOffset : ", this.props.initialClOffset, " initialOffset : ", initialOffset, " clientOffset : ", this.props.clientOffset);*/
+      /*console.info("diff : ", this.props.diff);*/
     if (!isDragging || !currentOffset) {
         return null;
     }
 
 
     if(isDragging){
-        console.error('dddddddddd : ', this.props);
+        /*console.error('dddddddddd : ', this.props);*/
         if(currentOffset.x < 0){
-          currentOffset.x = 0;
+           currentOffset.x = 0;
         }
-        /*if(currentOffset.y < 249){
-            currentOffset.y = 249;
-        }
-        if(currentOffset.x > 150){
-            currentOffset.x = 150;
-        }*/
 
 
     }
-
-    /*console.log("ITEM : ", item);*/
-
+      console.error('dddddddddd : ', this.props);
     return (
-      <div style={layerStyles}>
-        <div style={getItemStyles(this.props)}>
-          {this.renderItem(itemType, item)}
+        <div style={layerStyles(item.left + diff.x, item.top + diff.y)}>
+            {this.renderItem(itemType, item)}
         </div>
-      </div>
     );
   }
 }

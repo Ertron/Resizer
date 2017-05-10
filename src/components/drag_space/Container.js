@@ -14,6 +14,8 @@ const boxTarget = {
 
     let left = Math.round(item.left + delta.x);
     let top = Math.round(item.top + delta.y);
+      /*console.log('DELTA : ', delta);
+      console.log('item : ', item);*/
 
     component.moveBox(item.id, left, top);
   },
@@ -61,12 +63,11 @@ export default class Container extends Component {
       <DraggableBox key={key} id={key} {...item} />
     );
   }
-
   render() {
     const { connectDropTarget } = this.props;
     const { boxes } = this.state;
     return connectDropTarget(
-      <div style={{
+      <div id="drag-container" style={{
           width: this.props.social.w,
           height: this.props.social.h,
           border: '1px solid black',

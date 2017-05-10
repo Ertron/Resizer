@@ -37,11 +37,19 @@ export default class TargetBox extends Component {
         var f = event.target.files[0];
         var reader = new FileReader();
         reader.onload = (event) => {
-            console.log(" F : ", event);
-            this.props.dispatch({
-                type: 'ADD_FILE',
-                url: event.target.result
-            });
+            const img = new Image;
+            img.onload = ()=> {
+                this.props.dispatch({
+                    type: 'ADD_FILE',
+                    fileprops: {
+                        url: event.target.result,
+                        width: img.width,
+                        height: img.height,
+                    }
+                });
+            };
+
+            img.src = event.target.result;
         };
         reader.readAsDataURL(f);
     }

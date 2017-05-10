@@ -16,16 +16,26 @@ export default class Uploader extends Component {
 
     handleFileDrop(item, monitor) {
         if (monitor) {
-            const droppedFiles = monitor.getItem().files;
+            const droppedFile = monitor.getItem().files[0];
             var reader = new FileReader();
             reader.onload = (event) => {
-                this.props.dispatch({
-                    type: 'ADD_FILE',
-                    url: event.target.result
-                });
+                const img = new Image;
+                img.onload = ()=> {
+                    this.props.dispatch({
+                        type: 'ADD_FILE',
+                        fileprops: {
+                            url: event.target.result,
+                            width: img.width,
+                            height: img.height,
+                        }
+                    });
+                };
+
+                img.src = event.target.result;
             };
-            reader.readAsDataURL(droppedFiles[0]);
-            this.setState({ droppedFiles });
+            reader.readAsDataURL(droppedFile);
+
+            this.setState({ droppedFile });
         }
     }
 

@@ -1,6 +1,5 @@
 import { h, Component } from 'preact';
 import style from './style.less';
-import Preview from "../preview";
 import Uploader from "../uploader";
 import Social from "../social_btns";
 import DragSpace from "../drag_space";
@@ -18,8 +17,7 @@ export default class Home extends Component {
 			<div class={style.home}>
 				<p>Width: {this.props.social.w} Height: {this.props.social.h}</p>
 				<Uploader/>
-				{/*<Preview />*/}
-				<Social/>
+				<Social />
 				<DragSpace />
 			</div>
 		);

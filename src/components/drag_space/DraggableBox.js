@@ -9,7 +9,7 @@ import Box from './Box';
 const boxSource = {
   beginDrag(props) {
     const { id, title, left, top } = props;
-    console.info('props : ', props);
+    console.info('BEGIN DRAG PROPS : ', props);
     return { id, title, left, top };
   },
   endDrag(props){
@@ -58,7 +58,6 @@ export default class DraggableBox extends Component {
   };
 
   shouldComponentUpdate = shouldPureComponentUpdate;
-
   componentDidMount() {
     // Use empty image as a drag preview so browsers don't draw it
     // and we can draw whatever we want on the custom drag layer instead.
@@ -68,12 +67,14 @@ export default class DraggableBox extends Component {
       captureDraggingState: true,
     });
   }
+  componentWillUpdate(){
+      console.error('componentWillMount : ', this);
+  }
 
   render() {
     const { title, connectDragSource } = this.props;
-
     return connectDragSource(
-      <div style={getStyles(this.props)}>
+      <div id="draggableBox" style={getStyles(this.props)}>
         <Box title={title} />
       </div>,
     );

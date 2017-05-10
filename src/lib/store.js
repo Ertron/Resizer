@@ -1,8 +1,8 @@
 import { createStore } from 'redux';
 
 const ACTIONS = {
-    ADD_FILE: ({file, ...state}, { url }) => ({
-        file: url,
+    ADD_FILE: ({ file_props, ...state}, { fileprops }) => ({
+        file_props: fileprops,
         ...state
     } ),
     SHOW_LOADING: ({is_loading, ...state}, { is_loading: rendType }) => ({
@@ -17,10 +17,14 @@ const ACTIONS = {
         social: size,
         ...state
     } ),
+    SET_OFFSET: ({offset, ...state}, { params }) => ({
+        offset: params,
+        ...state
+    } ),
 };
 
 const INITIAL = {
-    file: '',
+    file_props: {url: '', width: '', height: ''},
     is_loading: false,
     social: {w: 200, h: 200}
 };
