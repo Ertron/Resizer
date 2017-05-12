@@ -111,13 +111,13 @@ export default class CustomDragLayer extends Component {
 
 
     if(isDragging){
-        console.info('<<<<< : ', item.left);
+        /*console.info('<<<<< : ', item.left);*/
         if(currentOffset.x < this.props.offset.left - (this.props.calc_params.indent_left * 2)) {
             currentOffset.x = this.props.offset.left - (this.props.calc_params.indent_left * 2);
             item.left = - this.props.calc_params.indent_left;
             console.error(" my IF : ", this.props.offset.left - (this.props.calc_params.indent_left * 2));
         }
-        console.info('>>>>> : ', item.top);
+        /*console.info('>>>>> : ', item.top);*/
         /*if(currentOffset.x < this.props.offset.left - this.props.calc_params.indent_left){
            currentOffset.x = this.props.offset.left - this.props.calc_params.indent_left;
            item.left = - this.props.calc_params.indent_left;
