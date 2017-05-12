@@ -34,8 +34,8 @@ export default class TargetBox extends Component {
         return result;
     }
     addFile(event){
-        var f = event.target.files[0];
-        var reader = new FileReader();
+        let f = event.target.files[0];
+        let reader = new FileReader();
         reader.onload = (event) => {
             const img = new Image;
             img.onload = ()=> {

@@ -13,7 +13,6 @@ export default class Uploader extends Component {
 
         this.state = { droppedFiles: [] };
     }
-
     handleFileDrop(item, monitor) {
         if (monitor) {
             const droppedFile = monitor.getItem().files[0];

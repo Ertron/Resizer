@@ -3,6 +3,7 @@ import style from './style.less';
 import Uploader from "../uploader";
 import Social from "../social_btns";
 import DragSpace from "../drag_space";
+import Cropper from "../cropper";
 import { connect } from 'preact-redux';
 
 import { DragDropContext, DragDropContextProvider } from 'react-dnd';
@@ -19,6 +20,7 @@ export default class Home extends Component {
 				<Uploader/>
 				<Social />
 				<DragSpace />
+				<Cropper />
 			</div>
 		);
 	}

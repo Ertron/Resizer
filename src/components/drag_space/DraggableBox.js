@@ -2,32 +2,58 @@ import { h, Component } from 'preact';
 import PropTypes from 'prop-types';
 import { DragSource } from 'react-dnd';
 import { getEmptyImage } from 'react-dnd-html5-backend';
-import shouldPureComponentUpdate from './shouldPureComponentUpdate';
 import ItemTypes from './ItemTypes';
 import Box from './Box';
+import { connect } from 'preact-redux';
 
 const boxSource = {
-  beginDrag(props) {
-    const { id, title, left, top } = props;
+    beginDrag(props) {
+    let { id, title, left, top } = props;
+    if(left < - props.calc_params.indent_left){
+        left = - props.calc_params.indent_left;
+    }
+    if(left > props.calc_params.indent_left){
+        left = props.calc_params.indent_left;
+    }
+    if(top > props.calc_params.indent_top){
+        top = props.calc_params.indent_top;
+    }
+    if(top < - props.calc_params.indent_top){
+        top = - props.calc_params.indent_top;
+        console.error("test TOP : ", top);
+    }
     console.info('BEGIN DRAG PROPS : ', props);
     return { id, title, left, top };
-  },
-  endDrag(props){
+    },
+    endDrag(props){
     /*console.log('END DRAG PROPS : ',props);*/
-  },
+    },
+    isDragging(props){
+    /*console.log("TEST DDRAGGGGING  PROPS : ", props);*/
+    /*return props.allow_drag;*/
+    return true;
+    },
+    /*canDrag(props){
+        return props.allow_drag;
+    }*/
 };
 
 function getStyles(props) {
-  let { left, top, isDragging } = props;
-  /*if(top < 0){
-      top = 0;
-  }*/
-  if(left < 0){
-    left = 0;
-  }
-  /*if(left > 150){
-    left = 150;
-  }*/
+    let { left, top, isDragging } = props;
+    left = left - props.calc_params.indent_left;
+    top = top - props.calc_params.indent_top;
+    if(left < - props.calc_params.indent_left * 2){
+      left = - props.calc_params.indent_left * 2;
+    }
+    if(left > 0){
+        left = 0;
+    }
+    if(top < - props.calc_params.indent_top * 2){
+        top = - props.calc_params.indent_top * 2;
+    }
+    if(top > 0){
+        top = 0;
+    }
   const transform = `translate3d(${left}px, ${top}px, 0)`;
 
   return {
@@ -40,7 +66,7 @@ function getStyles(props) {
     height: isDragging ? 0 : '',
   };
 }
-
+@connect(state => state)
 @DragSource(ItemTypes.BOX, boxSource, (connect, monitor) => ({
   connectDragSource: connect.dragSource(),
   connectDragPreview: connect.dragPreview(),
@@ -57,7 +83,6 @@ export default class DraggableBox extends Component {
     top: PropTypes.number.isRequired,
   };
 
-  shouldComponentUpdate = shouldPureComponentUpdate;
   componentDidMount() {
     // Use empty image as a drag preview so browsers don't draw it
     // and we can draw whatever we want on the custom drag layer instead.
@@ -67,9 +92,9 @@ export default class DraggableBox extends Component {
       captureDraggingState: true,
     });
   }
-  componentWillUpdate(){
+  /*componentWillUpdate(){
       console.error('componentWillMount : ', this);
-  }
+  }*/
 
   render() {
     const { title, connectDragSource } = this.props;

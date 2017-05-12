@@ -2,7 +2,6 @@ import { h, Component } from 'preact';
 import PropTypes from 'prop-types';
 import update from 'react/lib/update';
 import { DropTarget } from 'react-dnd';
-import shouldPureComponentUpdate from './shouldPureComponentUpdate';
 import ItemTypes from './ItemTypes';
 import DraggableBox from './DraggableBox';
 import { connect } from 'preact-redux';
@@ -37,7 +36,6 @@ export default class Container extends Component {
   static propTypes = {
     connectDropTarget: PropTypes.func.isRequired,
   };
-  shouldComponentUpdate = shouldPureComponentUpdate;
 
   constructor(props) {
     super(props);

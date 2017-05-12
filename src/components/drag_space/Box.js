@@ -15,21 +15,15 @@ export default class Box extends Component {
     yellow: PropTypes.bool,
   };
 
-  shouldComponentUpdate = shouldPureComponentUpdate;
-    componentDidUpdate(){
+    /*componentDidUpdate(){
         console.log('PROPS xxx : ',this.props);
-    }
+    }*/
 
   render() {
-    const { title, yellow } = this.props;
-    const backgroundColor = yellow ? 'yellow' : 'white';
     const display = this.props.file_props.url ? 'block' : 'none';
 
-      /*<div style={{ ...styles, backgroundColor }}>
-       {title}
-       </div>*/
     return (
-      <img style={{width: `${this.props.file_props.width}`, display: `${display}`}} src={this.props.file_props.url} />
+      <img style={{width: `${this.props.calc_params.width}px`, height: `${this.props.calc_params.height}px`, display: `${display}`}} src={this.props.file_props.url} />
     );
   }
 }

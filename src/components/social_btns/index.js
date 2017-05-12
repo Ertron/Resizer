@@ -5,10 +5,6 @@ import { connect } from 'preact-redux';
 
 @connect(state => state)
 export default class SocialButtons extends Component {
-    gav = function (x) {
-        console.log('THIS X : ', this);
-        return x;
-    };
     social_objects = [
         {
             name: "Facebook",
@@ -25,8 +21,8 @@ export default class SocialButtons extends Component {
                 },
                 {
                     type: 'Profile Picture',
-                    height: 400,
-                    width: 700,
+                    height: 450,
+                    width: 250,
                 },
                 {
                     type: 'Linked Post',
@@ -72,12 +68,19 @@ export default class SocialButtons extends Component {
         }
     ];
     render() {
-        let raw = this.gav;
         let changeSize = function(w, h, that){
-            console.log('W, H : ', that.gav(3));
             that.props.dispatch({
                 type: 'SOCIAL_SIZE',
                 size: {w: w, h: h}
+            });
+            that.props.dispatch({
+                type: 'SET_CALCULATED_SIZES',
+                params: {
+                    soc_w: w,
+                    soc_h: h,
+                    img_w: that.props.file_props.width,
+                    img_h: that.props.file_props.height
+                }
             });
         };
         let that = this;
