@@ -6,6 +6,39 @@ import ItemTypes from './ItemTypes';
 import Box from './Box';
 import { connect } from 'preact-redux';
 
+function getStyles(props) {
+    let { left, top, isDragging } = props;
+    left = left - props.calc_params.indent_left;
+    top = top - props.calc_params.indent_top;
+    if(left < - props.calc_params.indent_left * 2){
+        left = - props.calc_params.indent_left * 2;
+    }
+    if(left > 0){
+        left = 0;
+    }
+    if(top < - props.calc_params.indent_top * 2){
+        top = - props.calc_params.indent_top * 2;
+    }
+    if(top > 0){
+        top = 0;
+    }
+    /*this.props.dispatch({
+        type: 'SET_CROP_OFFSET',
+        coords: {x: 33, y: 55}
+    });*/
+    console.info('Left : ', left, ' Top : ', top);
+    const transform = `translate3d(${left}px, ${top}px, 0)`;
+
+    return {
+        position: 'absolute',
+        transform,
+        WebkitTransform: transform,
+        // IE fallback: hide the real node using CSS when dragging
+        // because IE will ignore our custom "empty image" drag preview.
+        opacity: isDragging ? 0 : 1,
+        height: isDragging ? 0 : '',
+    };
+}
 const boxSource = {
     beginDrag(props) {
     let { id, title, left, top } = props;
@@ -22,12 +55,12 @@ const boxSource = {
         top = - props.calc_params.indent_top;
         console.error("test TOP : ", top);
     }
-    console.info('BEGIN DRAG PROPS : ', props);
+    /*console.info('BEGIN DRAG PROPS : ', props);*/
     return { id, title, left, top };
     },
-    endDrag(props){
-    /*console.log('END DRAG PROPS : ',props);*/
-    },
+    /*endDrag(props, monitor){
+    console.log('END DRAG PROPS : ', props);
+    },*/
     isDragging(props){
     /*console.log("TEST DDRAGGGGING  PROPS : ", props);*/
     /*return props.allow_drag;*/
@@ -38,34 +71,7 @@ const boxSource = {
     }*/
 };
 
-function getStyles(props) {
-    let { left, top, isDragging } = props;
-    left = left - props.calc_params.indent_left;
-    top = top - props.calc_params.indent_top;
-    if(left < - props.calc_params.indent_left * 2){
-      left = - props.calc_params.indent_left * 2;
-    }
-    if(left > 0){
-        left = 0;
-    }
-    if(top < - props.calc_params.indent_top * 2){
-        top = - props.calc_params.indent_top * 2;
-    }
-    if(top > 0){
-        top = 0;
-    }
-  const transform = `translate3d(${left}px, ${top}px, 0)`;
 
-  return {
-    position: 'absolute',
-    transform,
-    WebkitTransform: transform,
-    // IE fallback: hide the real node using CSS when dragging
-    // because IE will ignore our custom "empty image" drag preview.
-    opacity: isDragging ? 0 : 1,
-    height: isDragging ? 0 : '',
-  };
-}
 @connect(state => state)
 @DragSource(ItemTypes.BOX, boxSource, (connect, monitor) => ({
   connectDragSource: connect.dragSource(),
@@ -82,8 +88,46 @@ export default class DraggableBox extends Component {
     left: PropTypes.number.isRequired,
     top: PropTypes.number.isRequired,
   };
+    constructor(props) {
+        super(props);
+        this.getStyles = this.getStyles.bind(this);
 
-  componentDidMount() {
+    }
+    getStyles(props) {
+        let { left, top, isDragging } = props;
+        left = left - props.calc_params.indent_left;
+        top = top - props.calc_params.indent_top;
+        if(left < - props.calc_params.indent_left * 2){
+            left = - props.calc_params.indent_left * 2;
+        }
+        if(left > 0){
+            left = 0;
+        }
+        if(top < - props.calc_params.indent_top * 2){
+            top = - props.calc_params.indent_top * 2;
+        }
+        if(top > 0){
+            top = 0;
+        }
+        console.info('Left : ', left, ' Top : ', top);
+        console.error(this);
+        this.props.dispatch({
+            type: 'SET_CROP_OFFSET',
+            coords: {x: 33, y: 55}
+        });
+        const transform = `translate3d(${left}px, ${top}px, 0)`;
+
+        return {
+            position: 'absolute',
+            transform,
+            WebkitTransform: transform,
+            // IE fallback: hide the real node using CSS when dragging
+            // because IE will ignore our custom "empty image" drag preview.
+            opacity: isDragging ? 0 : 1,
+            height: isDragging ? 0 : '',
+        };
+    }
+  componentDidMount(){
     // Use empty image as a drag preview so browsers don't draw it
     // and we can draw whatever we want on the custom drag layer instead.
     this.props.connectDragPreview(getEmptyImage(), {
@@ -91,15 +135,19 @@ export default class DraggableBox extends Component {
       // when it already knows it's being dragged so we can hide it with CSS.
       captureDraggingState: true,
     });
-  }
-  /*componentWillUpdate(){
-      console.error('componentWillMount : ', this);
-  }*/
 
-  render() {
+  }
+  componentWillUpdate(){
+      /*console.error('componentWillUpdate : ', this);*/
+  }
+    componentDidUpdate(){
+        console.error('componentDidUpdate : ', this);
+    }
+
+  render(){
     const { title, connectDragSource } = this.props;
     return connectDragSource(
-      <div id="draggableBox" style={getStyles(this.props)}>
+      <div id="draggableBox"  style={this.getStyles(this.props)}>
         <Box title={title} />
       </div>,
     );

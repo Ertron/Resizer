@@ -10,12 +10,10 @@ const boxTarget = {
   drop(props, monitor, component) {
     const delta = monitor.getDifferenceFromInitialOffset();
     const item = monitor.getItem();
-
     let left = Math.round(item.left + delta.x);
     let top = Math.round(item.top + delta.y);
       /*console.log('DELTA : ', delta);
       console.log('item : ', item);*/
-
     component.moveBox(item.id, left, top);
   },
 };
@@ -68,7 +66,6 @@ export default class Container extends Component {
       <div id="drag-container" style={{
           width: this.props.social.w,
           height: this.props.social.h,
-          border: '1px solid black',
           position: 'relative',
           margin: '0 0 0 0',
           overflow: 'hidden',

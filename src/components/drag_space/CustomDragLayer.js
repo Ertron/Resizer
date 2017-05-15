@@ -56,6 +56,7 @@ function calcPosition(props) {
     if(top > 0){
         top = 0;
     }
+
     return {
         left: left,
         top: top
@@ -115,7 +116,7 @@ export default class CustomDragLayer extends Component {
         if(currentOffset.x < this.props.offset.left - (this.props.calc_params.indent_left * 2)) {
             currentOffset.x = this.props.offset.left - (this.props.calc_params.indent_left * 2);
             item.left = - this.props.calc_params.indent_left;
-            console.error(" my IF : ", this.props.offset.left - (this.props.calc_params.indent_left * 2));
+            /*console.error(" my IF : ", this.props);*/
         }
         /*console.info('>>>>> : ', item.top);*/
         /*if(currentOffset.x < this.props.offset.left - this.props.calc_params.indent_left){

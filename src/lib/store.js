@@ -26,13 +26,18 @@ const ACTIONS = {
         calc_params: calculateSizes(params.soc_w, params.soc_h, params.img_w, params.img_h),
         ...state
     } ),
+    SET_CROP_OFFSET: ({crop_coord, ...state}, { coords }) => ({
+        crop_coord: coords,
+        ...state
+    } ),
 };
 
 const INITIAL = {
     file_props: {url: '', width: '', height: ''},
     is_loading: false,
     social: {w: 200, h: 200},
-    calc_params: {width: 200, height: 200, indent_left: 0, indent_top: 0}
+    calc_params: {width: 200, height: 200, indent_left: 0, indent_top: 0},
+    crop_coord: {x : 0, y: 0}
 };
 
 export default createStore((state, action) => (
