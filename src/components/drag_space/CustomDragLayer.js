@@ -56,7 +56,6 @@ function calcPosition(props) {
     if(top > 0){
         top = 0;
     }
-
     return {
         left: left,
         top: top

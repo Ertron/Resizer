@@ -3,30 +3,16 @@ import { connect } from 'preact-redux';
 
 function cropIt(props){
     let canvas = document.getElementById('canvas');
-    let testimg = document.getElementById('testimg');
-    let { left, top } = props;
-    left = left - props.calc_params.indent_left;
-    top = top - props.calc_params.indent_top;
-    if(left < - props.calc_params.indent_left * 2){
-        left = - props.calc_params.indent_left * 2;
-    }
-    if(left > 0){
-        left = 0;
-    }
-    if(top < - props.calc_params.indent_top * 2){
-        top = - props.calc_params.indent_top * 2;
-    }
-    if(top > 0){
-        top = 0;
-    }
     let context = canvas.getContext('2d');
     console.log('CANVAS : ', props);
     let imageObj = new Image();
 
     imageObj.onload = function() {
      // draw cropped image
-        let sourceX = left; //отступ камеры по X
-        let sourceY = top; //отступ камеры по Y
+        let test1 = (props.calc_params.width / props.crop_coord.w);
+        console.error('test 1 : ', props.calc_params.width, ' s : ', props.crop_coord.x);
+        let sourceX = - props.social.w / (props.calc_params.width / props.crop_coord.x) * 2; //отступ камеры по X
+        let sourceY = - props.social.h / (props.calc_params.height / props.crop_coord.y) * 2; //отступ камеры по Y
         let sourceWidth = imageObj.width;
         let sourceHeight = imageObj.height;
         let destWidth = props.calc_params.width; // область отрисовки изображения (размер)
@@ -56,7 +42,6 @@ function cropIt(props){
 
 @connect(state => state)
 export default class Cropper extends Component {
-
 
     render() {
         console.log('CROPPER : ', this.props);

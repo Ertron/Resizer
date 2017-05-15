@@ -59,7 +59,12 @@ const boxSource = {
     return { id, title, left, top };
     },
     /*endDrag(props, monitor){
-    console.log('END DRAG PROPS : ', props);
+        console.log('END DRAG PROPS : ', props);
+        console.info('Left : ', props.left, ' Top : ', props.top);
+         props.dispatch({
+            type: 'SET_CROP_OFFSET',
+            coords: {x: 33, y: 55}
+         });
     },*/
     isDragging(props){
     /*console.log("TEST DDRAGGGGING  PROPS : ", props);*/
@@ -109,12 +114,10 @@ export default class DraggableBox extends Component {
         if(top > 0){
             top = 0;
         }
-        console.info('Left : ', left, ' Top : ', top);
-        console.error(this);
-        this.props.dispatch({
-            type: 'SET_CROP_OFFSET',
-            coords: {x: 33, y: 55}
-        });
+        console.info('=====>>>>>>> getStyles: ', {x: left, y: top});
+        /*console.info('Left : ', left, ' Top : ', top);
+        console.error(this);*/
+
         const transform = `translate3d(${left}px, ${top}px, 0)`;
 
         return {
@@ -141,7 +144,11 @@ export default class DraggableBox extends Component {
       /*console.error('componentWillUpdate : ', this);*/
   }
     componentDidUpdate(){
-        console.error('componentDidUpdate : ', this);
+        /*console.error('componentDidUpdate : ', this);*/
+        /*this.props.dispatch({
+            type: 'SET_CROP_OFFSET',
+            coords: {x: 33, y: 55}
+        });*/
     }
 
   render(){
