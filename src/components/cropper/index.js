@@ -11,8 +11,8 @@ function cropIt(props){
      // draw cropped image
         let test1 = (props.calc_params.width / props.crop_coord.w);
         console.error('test 1 : ', props.calc_params.width, ' s : ', props.crop_coord.x);
-        let sourceX = - props.social.w / (props.calc_params.width / props.crop_coord.x) * 2; //отступ камеры по X
-        let sourceY = - props.social.h / (props.calc_params.height / props.crop_coord.y) * 2; //отступ камеры по Y
+        let sourceX = - imageObj.width / (props.social.w / props.crop_coord.x); //отступ камеры по X
+        let sourceY = - props.crop_coord.y; //отступ камеры по Y
         let sourceWidth = imageObj.width;
         let sourceHeight = imageObj.height;
         let destWidth = props.calc_params.width; // область отрисовки изображения (размер)

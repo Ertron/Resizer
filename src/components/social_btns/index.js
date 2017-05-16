@@ -26,7 +26,7 @@ export default class SocialButtons extends Component {
                 },
                 {
                     type: 'Linked Post',
-                    height: 300,
+                    height: 800,
                     width: 400,
                 },
                 {
@@ -46,7 +46,7 @@ export default class SocialButtons extends Component {
                 },
                 {
                     type: 'Profile Cover',
-                    height: 250,
+                    height: 200,
                     width: 200,
                 },
                 {
@@ -69,6 +69,11 @@ export default class SocialButtons extends Component {
     ];
     render() {
         let changeSize = function(w, h, that){
+            console.info(' CHANGE SIZE w : ', w ,' h : ', h );
+            if(w > that.props.file_props.width || h > that.props.file_props.height){
+                console.log('bad size');
+                return false;
+            }
             that.props.dispatch({
                 type: 'SOCIAL_SIZE',
                 size: {w: w, h: h}
@@ -83,14 +88,25 @@ export default class SocialButtons extends Component {
                 }
             });
         };
+        let buttonStyle = function (w, h, that) {
+            let color = 'green';
+            if(w > that.props.file_props.width || h > that.props.file_props.height){
+                color = 'red';
+            }
+            console.info(' buttonStyle w : ', w ,' h : ', h , ' WIDTH :  ', that.props.file_props.width ,' COLOR : ', color);
+            return{
+                color: color
+            }
+        };
         let that = this;
+        let enable = true;
         return (
             <Accordion>
                 {
                     this.social_objects.map(function(ub) {
                         let buttons = ub.templates.map(function(button) {
                             return (
-                                <p onClick={(e)=> changeSize(button.width, button.height, that)}>{button.type}</p>
+                                <p style={buttonStyle(button.width, button.height, that)} onClick={(e)=> changeSize(button.width, button.height, that)}>{button.type}</p>
                             )
                         });
 
