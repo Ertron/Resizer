@@ -42,9 +42,9 @@ export default function calculateSizes(soc_w, soc_h, img_w, img_h){
     }
     
     return {
-        width: img_width,
-        height: img_height,
-        indent_left: indent_left,
-        indent_top: indent_top
+        width: Math.round(img_width),
+        height: Math.round(img_height),
+        indent_left: Math.round(indent_left),
+        indent_top: Math.round(indent_top)
     }
 }

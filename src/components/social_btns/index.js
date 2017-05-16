@@ -69,7 +69,6 @@ export default class SocialButtons extends Component {
     ];
     render() {
         let changeSize = function(w, h, that){
-            console.info(' CHANGE SIZE w : ', w ,' h : ', h );
             if(w > that.props.file_props.width || h > that.props.file_props.height){
                 console.log('bad size');
                 return false;
@@ -93,7 +92,6 @@ export default class SocialButtons extends Component {
             if(w > that.props.file_props.width || h > that.props.file_props.height){
                 color = 'red';
             }
-            console.info(' buttonStyle w : ', w ,' h : ', h , ' WIDTH :  ', that.props.file_props.width ,' COLOR : ', color);
             return{
                 color: color
             }

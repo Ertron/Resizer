@@ -22,11 +22,6 @@ export default class Input extends Component {
         });
 		return false;
 	}
-	dragDroped(event){
-    	event.preventDefault();
-    	console.log('event : ', event);
-        return false;
-	}
 	labelStyle(value){
     	let result = style.custom_upload_btn_div + ' ' + style.activated;
     	if(value){
@@ -38,7 +33,6 @@ export default class Input extends Component {
 	    return (<div
 			onDragOver={(e)=> this.dragOvered(e, true)}
 			onDragLeave={(e)=> this.dragOvered(e, false)}
-			onDrop={this.dragDroped}
 		>
             {!props.is_loading ?
 				<label class={style.custom_upload_btn_label}>
