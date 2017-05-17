@@ -45,6 +45,7 @@ export default class Container extends Component {
   }
 
   moveBox(id, left, top) {
+      console.error('=====>>>>>>> moveBox: ', {x: left, y: top});
     this.setState(update(this.state, {
       boxes: {
         [id]: {

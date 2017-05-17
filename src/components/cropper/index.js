@@ -6,9 +6,8 @@ function cropIt(props){
     let hiddencanvas = document.getElementById('hiddencanvas');
     let context = canvas.getContext('2d');
     let context_hiddencanvas = hiddencanvas.getContext('2d');
-    console.log('CANVAS : ', props);
     let imageObj = new Image();
-    /*let hid_img = document.getElementById('hiddenimg');*/
+    let area = new Image();
 
     imageObj.onload = function() {
      // draw cropped image
@@ -25,15 +24,14 @@ function cropIt(props){
         hiddencanvas.height = props.calc_params.height;
         context_hiddencanvas.drawImage(imageObj, 0, 0, props.file_props.width, props.file_props.height, 0, 0, destWidth, destHeight);
         let hidden_c_url = hiddencanvas.toDataURL();
-        let area = new Image();
+
         area.onload = function() {
-            // draw cropped image
 
             canvas.width = props.social.w;
             canvas.height = props.social.h;
 
             context.drawImage(area, sourceX, sourceY, sourceWidth, sourceHeight, destX, destY, destWidth, destHeight);
-            console.log(' context_hiddencanvas : ', context_hiddencanvas);
+            /*console.log(' context_hiddencanvas : ', context_hiddencanvas);*/
             let url = canvas.toDataURL();
             let link = document.createElement('a');
             link.setAttribute('target','_blank');
@@ -42,11 +40,6 @@ function cropIt(props){
             link.click();
         };
         area.src = hidden_c_url;
-        //context.drawImage(imageObj, sourceX, sourceY, sourceWidth, sourceHeight, destX, destY, destWidth, destHeight);
-        /*let url = canvas.toDataURL();
-        let area = new Image();
-        area.src = url;*/
-
 
     };
     imageObj.src = props.file_props.url;
@@ -56,7 +49,6 @@ function cropIt(props){
 export default class Cropper extends Component {
 
     render() {
-        console.log('CROPPER : ', this.props);
         return (
         <div style={{width: '100%', float: 'left'}}>
             <div onClick={(e)=> cropIt(this.props)}>BTN</div>
