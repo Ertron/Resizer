@@ -45,7 +45,7 @@ export default class Container extends Component {
   }
 
   moveBox(id, left, top) {
-      console.error('=====>>>>>>> moveBox: ', {x: left, y: top});
+      /*console.error('=====>>>>>>> moveBox: ', {x: left, y: top});*/
     this.setState(update(this.state, {
       boxes: {
         [id]: {
@@ -71,7 +71,7 @@ export default class Container extends Component {
           type: 'SET_CROP_OFFSET',
           coords: {x: left, y: top}
       });
-      console.info('=====>>>>>>> moveBox: ', {x: left, y: top});
+      /*console.info('=====>>>>>>> moveBox: ', {x: left, y: top});*/
   }
 
   renderBox(item, key) {

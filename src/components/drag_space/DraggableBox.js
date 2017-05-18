@@ -26,7 +26,7 @@ function getStyles(props) {
         type: 'SET_CROP_OFFSET',
         coords: {x: 33, y: 55}
     });*/
-    console.info('Left : ', left, ' Top : ', top);
+    /*console.info('Left : ', left, ' Top : ', top);*/
     const transform = `translate3d(${left}px, ${top}px, 0)`;
 
     return {
@@ -70,7 +70,7 @@ const boxSource = {
          });
     },*/
     isDragging(props){
-    console.log("TEST DDRAGGGGING  PROPS : ", props);
+    /*console.log("TEST DDRAGGGGING  PROPS : ", props);*/
     /*return props.allow_drag;*/
     return true;
     },
@@ -103,29 +103,28 @@ export default class DraggableBox extends Component {
     }
     getStyles(props) {
         let { left, top, isDragging } = props;
-        console.log('LEFT BEFORE : ', left);
         left = left - props.calc_params.indent_left;
-        console.log('LEFT AFTER : ', left);
+        /*console.log('LEFT AFTER : ', left);*/
         top = top - props.calc_params.indent_top;
         if(left < - props.calc_params.indent_left * 2){
-            console.error("test LEFT < : ", left);
+            /*console.error("test LEFT < : ", left);*/
             left = - props.calc_params.indent_left * 2;
-            console.error("test LEFT < : ", left);
+            /*console.error("test LEFT < : ", left);*/
         }
         if(left > 0){
-            console.error("test LEFT > 0 : ", left);
+            /*console.error("test LEFT > 0 : ", left);*/
             left = 0;
         }
         if(top < - props.calc_params.indent_top * 2){
-            console.error("test TOP < : ", left);
+            /*console.error("test TOP < : ", left);*/
             top = - props.calc_params.indent_top * 2;
-            console.error("test TOP < : ", left);
+            /*console.error("test TOP < : ", left);*/
         }
         if(top > 0){
-            console.error("test TOP > 0 : ", left);
+            /*console.error("test TOP > 0 : ", left);*/
             top = 0;
         }
-        console.info('=====>>>>>>> getStyles: ', {x: left, y: top});
+        /*console.info('=====>>>>>>> getStyles: ', {x: left, y: top});*/
         /*console.info('Left : ', left, ' Top : ', top);
         console.error(this);*/
 

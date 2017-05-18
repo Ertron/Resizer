@@ -6,10 +6,9 @@ import BoxDragPreview from './BoxDragPreview';
 import { connect } from 'preact-redux';
 
 const layerStyles = function (object, props){
+    /* JUMP BUG CHECKED !!! */
     let tops = object.top ;
     let lefts =  object.left;
-
-    /*console.log(' layerStyles : ', object);*/
     return {
         position: 'absolute',
         pointerEvents: 'none',
@@ -18,7 +17,6 @@ const layerStyles = function (object, props){
         top: tops,
         width: '100%',
         height: '100%',
-        backgroundColor: 'red'
     }
 };
 
@@ -42,8 +40,11 @@ const layerStyles = function (object, props){
 }*/
 
 function calcPosition(props) {
+    /* JUMP BUG CHECKED !!! */
+
     let left = props.item.left + props.diff.x - props.calc_params.indent_left;
     let top = props.item.top + props.diff.y - props.calc_params.indent_top;
+    console.log('calcPosition : LEFT : ',left,' item.left : ',props.item.left,' props.diff.x : ',props.diff.x,' props.calc_params.indent_left : ',props.calc_params.indent_left);
     if(left < - props.calc_params.indent_left * 2){
         left = -props.calc_params.indent_left * 2;
     }
@@ -111,12 +112,15 @@ export default class CustomDragLayer extends Component {
 
 
     if(isDragging){
+        /*console.log("TEST DDRAGGGGING  PROPS : ", this.props);*/
+        /*console.log("currentOffset DDRAGGGGING  PROPS : ", this.props.currentOffset);
+        console.log("diff DDRAGGGGING  PROPS : ", this.props.diff);*/
         /*console.info('<<<<< : ', item.left);*/
-        if(currentOffset.x < this.props.offset.left - (this.props.calc_params.indent_left * 2)) {
+        /*if(currentOffset.x < this.props.offset.left - (this.props.calc_params.indent_left * 2)) {
             currentOffset.x = this.props.offset.left - (this.props.calc_params.indent_left * 2);
             item.left = - this.props.calc_params.indent_left;
-            /*console.error(" my IF : ", this.props);*/
-        }
+            console.error(" my IF : ", this.props);
+        }*/
         /*console.info('>>>>> : ', item.top);*/
         /*if(currentOffset.x < this.props.offset.left - this.props.calc_params.indent_left){
            currentOffset.x = this.props.offset.left - this.props.calc_params.indent_left;

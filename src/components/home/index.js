@@ -13,7 +13,6 @@ import HTML5Backend, { NativeTypes } from 'react-dnd-html5-backend';
 @DragDropContext(HTML5Backend)
 export default class Home extends Component {
 	render() {
-	    console.log('this P', this.props.social);
 		return (
 			<div class={style.home}>
 				<p>Width: {this.props.social.w} Height: {this.props.social.h}</p>
