@@ -45,7 +45,7 @@ export default class Container extends Component {
   }
 
   moveBox(id, left, top) {
-      /*console.error('=====>>>>>>> moveBox: ', {x: left, y: top});*/
+      console.error('=====>>>>>>> moveBox: ', {x: left, y: top});
     this.setState(update(this.state, {
       boxes: {
         [id]: {
@@ -53,24 +53,24 @@ export default class Container extends Component {
         },
       },
     }));
-      left = left - this.props.calc_params.indent_left;
-      top = top - this.props.calc_params.indent_top;
-      if(left < - this.props.calc_params.indent_left * 2){
-          left = - this.props.calc_params.indent_left * 2;
-      }
-      if(left > 0){
-          left = 0;
-      }
-      if(top < - this.props.calc_params.indent_top * 2){
-          top = - this.props.calc_params.indent_top * 2;
-      }
-      if(top > 0){
-          top = 0;
-      }
-      this.props.dispatch({
-          type: 'SET_CROP_OFFSET',
-          coords: {x: left, y: top}
-      });
+      // left = left - this.props.calc_params.indent_left;
+      // top = top - this.props.calc_params.indent_top;
+      // if(left < - this.props.calc_params.indent_left * 2){
+      //     left = - this.props.calc_params.indent_left * 2;
+      // }
+      // if(left > 0){
+      //     left = 0;
+      // }
+      // if(top < - this.props.calc_params.indent_top * 2){
+      //     top = - this.props.calc_params.indent_top * 2;
+      // }
+      // if(top > 0){
+      //     top = 0;
+      // }
+      // this.props.dispatch({
+      //     type: 'SET_CROP_OFFSET',
+      //     coords: {x: left, y: top}
+      // });
       /*console.info('=====>>>>>>> moveBox: ', {x: left, y: top});*/
   }
 

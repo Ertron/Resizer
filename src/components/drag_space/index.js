@@ -19,7 +19,6 @@ export default class DragAroundCustomDragLayer extends Component {
         this.setOffsets(this.base.offsetLeft, this.base.offsetTop);
     }
     componentDidUpdate(){
-        /*console.log('this.base : ', this.base.getBoundingClientRect());*/
         if(this.base.offsetLeft != this.props.offset.left || this.base.offsetTop != this.props.offset.top){
             this.setOffsets(this.base.offsetLeft, this.base.offsetTop);
         }

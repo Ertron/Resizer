@@ -44,7 +44,8 @@ function calcPosition(props) {
 
     let left = props.item.left + props.diff.x - props.calc_params.indent_left;
     let top = props.item.top + props.diff.y - props.calc_params.indent_top;
-    console.log('calcPosition : LEFT : ',left,' item.left : ',props.item.left,' props.diff.x : ',props.diff.x,' props.calc_params.indent_left : ',props.calc_params.indent_left);
+    console.info('currentOffset : ', props.currentOffset, ' clientOffset : ', props.clientOffset);
+    /*console.log('calcPosition : LEFT : ',left,' item.left : ',props.item.left,' props.diff.x : ',props.diff.x,' props.calc_params.indent_left : ',props.calc_params.indent_left);*/
     if(left < - props.calc_params.indent_left * 2){
         left = -props.calc_params.indent_left * 2;
     }
@@ -110,9 +111,8 @@ export default class CustomDragLayer extends Component {
         return null;
     }
 
-
     if(isDragging){
-        /*console.log("TEST DDRAGGGGING  PROPS : ", this.props);*/
+        // console.log("TEST DDRAGGGGING  PROPS : ", item);
         /*console.log("currentOffset DDRAGGGGING  PROPS : ", this.props.currentOffset);
         console.log("diff DDRAGGGGING  PROPS : ", this.props.diff);*/
         /*console.info('<<<<< : ', item.left);*/
@@ -122,30 +122,6 @@ export default class CustomDragLayer extends Component {
             console.error(" my IF : ", this.props);
         }*/
         /*console.info('>>>>> : ', item.top);*/
-        /*if(currentOffset.x < this.props.offset.left - this.props.calc_params.indent_left){
-           currentOffset.x = this.props.offset.left - this.props.calc_params.indent_left;
-           item.left = - this.props.calc_params.indent_left;
-            this.props.dispatch({
-                type: 'ALLOW_DRAG',
-                allow_drag_state: false
-            });
-           /!*console.info('<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< : ', this.props);*!/
-        }
-        else if(currentOffset.y < this.props.offset.top - this.props.calc_params.indent_top){
-            currentOffset.y = this.props.offset.top - this.props.calc_params.indent_top;
-            item.top = - this.props.calc_params.indent_top;
-            this.props.dispatch({
-                type: 'ALLOW_DRAG',
-                allow_drag_state: false
-            });
-        }
-        else{
-            this.props.dispatch({
-                type: 'ALLOW_DRAG',
-                allow_drag_state: true
-            });
-            console.error('dddddddddd : ', this.props);
-        }*/
     }
       /*console.error('dddddddddd : ', this.props);*/
     return (

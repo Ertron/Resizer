@@ -20,6 +20,7 @@ export default class Uploader extends Component {
             reader.onload = (event) => {
                 const img = new Image;
                 img.onload = ()=> {
+                    console.error('img : ', img.width, 'img hei : ', img.height);
                     this.props.dispatch({
                         type: 'ADD_FILE',
                         fileprops: {

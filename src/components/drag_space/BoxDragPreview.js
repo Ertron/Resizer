@@ -1,6 +1,5 @@
 import { h, Component } from 'preact';
 import PropTypes from 'prop-types';
-import shouldPureComponentUpdate from './shouldPureComponentUpdate';
 import Box from './Box';
 
 const styles = {
@@ -14,7 +13,6 @@ export default class BoxDragPreview extends Component {
     title: PropTypes.string.isRequired,
   };
 
-  shouldComponentUpdate = shouldPureComponentUpdate;
 
   constructor(props) {
     super(props);
