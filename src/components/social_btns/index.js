@@ -7,7 +7,6 @@ import { social_objects } from '../../lib/social_buttons';
 @connect(state => state)
 export default class SocialButtons extends Component {
     render() {
-        console.log('this.social_objects', social_objects);
         let changeSize = function(w, h, that){
             if(w > that.props.file_props.width || h > that.props.file_props.height){
                 console.log('bad size');

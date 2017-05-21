@@ -3,6 +3,8 @@ import { h, Component } from 'preact';
 import TargetBox from './TargetBox';
 import { connect } from 'preact-redux';
 import { NativeTypes } from 'react-dnd-html5-backend';
+import checkFileSize from '../../utils/upload_file_size_control';
+import { social_objects } from '../../lib/social_buttons';
 
 @connect(state => state)
 export default class Uploader extends Component {
@@ -20,7 +22,10 @@ export default class Uploader extends Component {
             reader.onload = (event) => {
                 const img = new Image;
                 img.onload = ()=> {
-                    console.error('img : ', img.width, 'img hei : ', img.height);
+                    if(!checkFileSize(social_objects, img.width, img.height)){
+                        alert('WRONG IMG SIZE');
+                        return false;
+                    }
                     this.props.dispatch({
                         type: 'ADD_FILE',
                         fileprops: {
@@ -30,7 +35,6 @@ export default class Uploader extends Component {
                         }
                     });
                 };
-
                 img.src = event.target.result;
             };
             reader.readAsDataURL(droppedFile);

@@ -3,6 +3,8 @@ import PropTypes from 'prop-types';
 import { DropTarget } from 'react-dnd';
 import { connect } from 'preact-redux';
 import style from './targetBoxStyle.less';
+import checkFileSize from '../../utils/upload_file_size_control';
+import { social_objects } from '../../lib/social_buttons';
 
 const boxTarget = {
     drop(props, monitor, component) {
@@ -39,6 +41,10 @@ export default class TargetBox extends Component {
         reader.onload = (event) => {
             const img = new Image;
             img.onload = ()=> {
+                if(!checkFileSize(social_objects, img.width, img.height)){
+                    alert('WRONG IMG SIZE');
+                    return false;
+                }
                 this.props.dispatch({
                     type: 'ADD_FILE',
                     fileprops: {
