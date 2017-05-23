@@ -6,26 +6,31 @@ export const social_objects = [
                 type: 'Page Cover',
                 height: 400,
                 width: 450,
+                id: 0
             },
             {
                 type: 'Profile Cover',
                 height: 250,
                 width: 450,
+                id: 1
             },
             {
                 type: 'Profile Picture',
                 height: 450,
                 width: 250,
+                id: 2
             },
             {
                 type: 'Linked Post',
                 height: 800,
                 width: 400,
+                id: 3
             },
             {
                 type: 'Square Post',
                 height: 300,
                 width: 300,
+                id: 4
             }
         ]
     },

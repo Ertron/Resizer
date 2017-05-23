@@ -14,8 +14,8 @@ const ACTIONS = {
         is_overed: rendType,
         ...state
     } ),
-    SOCIAL_SIZE: ({social, ...state}, { size }) => ({
-        social: size,
+    SOCIAL: ({social, ...state}, { params }) => ({
+        social: params,
         ...state
     } ),
     SET_OFFSET: ({offset, ...state}, { params }) => ({
@@ -35,7 +35,7 @@ const ACTIONS = {
 const INITIAL = {
     file_props: {url: '', width: '', height: ''},
     is_loading: false,
-    social: {w: 200, h: 200},
+    social: {w: 200, h: 200, soc_name: 'none', name: 'none'},
     calc_params: {width: 200, height: 200, indent_left: 0, indent_top: 0},
     crop_coord: {x : 0, y: 0}
 };
